@@ -124,3 +124,4 @@ class OrderedStringList(OrderedList):
             return 0
         res = (-1 if v1 < v2 else 1)*(1 if self._OrderedList__ascending else -1)
         return res
+
