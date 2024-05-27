@@ -1,0 +1,35 @@
+def get_second_maximum_index(numbers_list):
+    if len(numbers_list) < 2:
+        return -1
+        
+    mx_val = 0 # assume that every number in numbers_list is positive
+    mx_ind = -1 # index of element with maximum value
+    for i in range(len(numbers_list)):
+        if numbers_list[i] >= mx_val:
+            mx_val = numbers_list[i]
+            mx_ind = i 
+    
+    mx_val = 0
+    pre_mx_ind = -1 # index of second maximum
+    for i in range(len(numbers_list)):
+        if i != mx_ind and numbers_list[i] >= mx_val:
+            mx_val = numbers_list[i]
+            pre_mx_ind = i
+    
+    return pre_mx_ind
+            
+import unittest
+
+class TestTask(unittest.TestCase):
+    def test_get_second_maximum_index(self):
+        self.assertEqual(get_second_maximum_index([]), -1)
+        self.assertEqual(get_second_maximum_index([1]), -1)
+        self.assertEqual(get_second_maximum_index([1, 2]), 0)
+        self.assertEqual(get_second_maximum_index([1, 1, 1]), 1)
+        self.assertEqual(get_second_maximum_index([1, 1, 2, 2]), 2)
+        self.assertEqual(get_second_maximum_index([100, 20, 12, 25, 156, 98]), 0)
+    
+if __name__ == '__main__':
+    print("BEFORE")
+    unittest.main()
+
