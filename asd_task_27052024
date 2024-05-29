@@ -49,8 +49,7 @@ def get_second_maximum_index_recursion_no_cycles(numbers_list):
         if numbers_list[cur_ind] > numbers_list[mx_ind]:
             pre_mx_ind = mx_ind
             mx_ind = cur_ind
-        else:    
-            if numbers_list[cur_ind] > numbers_list[pre_mx_ind]:
+        elif numbers_list[cur_ind] > numbers_list[pre_mx_ind]:
                 pre_mx_ind = cur_ind
         
         return helper(numbers_list, cur_ind + 1, mx_ind, pre_mx_ind)
