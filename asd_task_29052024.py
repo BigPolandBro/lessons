@@ -22,3 +22,4 @@ def find_all_catalog_files_recursively(dir_path = '.'):
 cut_dir_name = '~/Desktop/test_root'
 dir_name = os.path.expanduser(cut_dir_name)
 find_all_catalog_files_recursively(dir_name)
+
