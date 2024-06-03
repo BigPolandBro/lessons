@@ -74,4 +74,4 @@ class SimpleTree:
             for ChildNode in Node.Children:
                 helper(ChildNode)
         helper(self.Root)
-        
+
