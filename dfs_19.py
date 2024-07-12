@@ -58,9 +58,29 @@ class SimpleGraph:
         self.m_adjacency[v1][v2] = 0
         self.m_adjacency[v2][v1] = 0
         
+    def VertexToIndex(self, vertex):
+        for i in range(self.max_vertex):
+            if self.vertex[i] == vertex:
+                return i
+                
+    def VertexListToIndexList(self, vertex_list):
+        index_list = []
+        for vertex in vertex_list:
+            index_list.append(self.VertexToIndex(vertex))
+        return index_list
+            
+    def IndexToVertex(self, index):
+        return self.vertex[index]
+        
+    def IndexListToVertexList(self, index_list):
+        vertex_list = []
+        for index in index_list:
+            vertex_list.append(self.IndexToVertex(index))
+        return vertex_list
+        
     def DepthFirstSearch(self, VFrom, VTo):
         if VFrom == VTo:
-            return [VFrom]
+            return self.IndexListToVertexList([VFrom])
             
         stack = Stack()
         x = VFrom
@@ -76,7 +96,7 @@ class SimpleGraph:
                 if self.IsEdge(x, VTo):
                     self.vertex[VTo].Hit = True
                     stack.push(VTo)
-                    return stack.stack
+                    return self.IndexListToVertexList(stack.stack)
 
             next_found = False
             while next_vertex[x] < self.max_vertex and not next_found:
@@ -92,7 +112,6 @@ class SimpleGraph:
                 next_found = True
                 
         return []
-
 
 
 
