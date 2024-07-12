@@ -14,33 +14,43 @@ class TestSimpleGraph(unittest.TestCase):
         for i in range(0, len(edges), 2):
             #print(edges[i], edges[i+1])
             self.graph.AddEdge(edges[i], edges[i+1])
+            
+    def test_convert_index_vertex(self):
+        vertex = self.graph.vertex[0]
+        vertex2 = Vertex(100)
+        # print(vertex.Value, vertex2.Value)
+        # print(vertex.Hit, vertex2.Hit)
+        # print(vertex == vertex2)
+        self.assertEqual(self.graph.VertexToIndex(vertex), 0)
+        self.assertEqual([0], self.graph.VertexListToIndexList([vertex]))
+        self.assertEqual([vertex], self.graph.IndexListToVertexList([0]))
     
     def test_dfs(self):
         for a in [0, 1, 2, 3, 4, 5, 7]:
             for b in [6, 8, 9]:
-                self.assertEqual(self.graph.DepthFirstSearch(a, b), [])
+                self.assertEqual(self.graph.DepthFirstSearch(a, b), self.graph.IndexListToVertexList([]))
         
         for a in range(0, 10):
-            self.assertEqual(self.graph.DepthFirstSearch(a, a), [a])
+            self.assertEqual(self.graph.DepthFirstSearch(a, a), self.graph.IndexListToVertexList([a]))
             
         for a in range(0, 10):
             for b in range(0, 10):
                 if self.graph.IsEdge(a, b):
                     #print(a, b, self.graph.IsEdge(a, b))
-                    self.assertEqual(self.graph.DepthFirstSearch(a, b), [a, b])
+                    self.assertEqual(self.graph.DepthFirstSearch(a, b), self.graph.IndexListToVertexList([a, b]))
                     
         for a in [6, 8, 9]:
             for b in [6, 8, 9]:
                 if a == b:
                     continue
-                self.assertEqual(self.graph.DepthFirstSearch(a, b), [a, b])
+                self.assertEqual(self.graph.DepthFirstSearch(a, b), self.graph.IndexListToVertexList([a, b]))
                     
-        self.assertEqual(self.graph.DepthFirstSearch(0, 4), [0, 1, 3, 4])
-        self.assertEqual(self.graph.DepthFirstSearch(2, 7), [2, 0, 1, 5, 7])
-        self.assertEqual(self.graph.DepthFirstSearch(7, 3), [7, 5, 1, 3])
-        self.assertEqual(self.graph.DepthFirstSearch(7, 4), [7, 5, 1, 0, 2, 4])
-        self.assertEqual(self.graph.DepthFirstSearch(0, 5), [0, 1, 5])
-        self.assertEqual(self.graph.DepthFirstSearch(0, 7), [0, 1, 3, 4, 2, 5, 7])
+        self.assertEqual(self.graph.DepthFirstSearch(0, 4), self.graph.IndexListToVertexList([0, 1, 3, 4]))
+        self.assertEqual(self.graph.DepthFirstSearch(2, 7), self.graph.IndexListToVertexList([2, 0, 1, 5, 7]))
+        self.assertEqual(self.graph.DepthFirstSearch(7, 3), self.graph.IndexListToVertexList([7, 5, 1, 3]))
+        self.assertEqual(self.graph.DepthFirstSearch(7, 4), self.graph.IndexListToVertexList([7, 5, 1, 0, 2, 4]))
+        self.assertEqual(self.graph.DepthFirstSearch(0, 5), self.graph.IndexListToVertexList([0, 1, 5]))
+        self.assertEqual(self.graph.DepthFirstSearch(0, 7), self.graph.IndexListToVertexList([0, 1, 3, 4, 2, 5, 7]))
         
     
     # def setUp(self):
