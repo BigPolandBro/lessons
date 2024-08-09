@@ -11,6 +11,7 @@ class TestShell(unittest.TestCase):
         self.assertEqual(KnuthSequence(4), [1])
         self.assertEqual(KnuthSequence(3), [1])
         self.assertEqual(KnuthSequence(1), [])
+        self.assertEqual(KnuthSequence(0), [])
         
     def test_sort(self):
         a = [1, 2, 3, 4, 5, 6, 7]
