@@ -4,13 +4,13 @@ class TestShell(unittest.TestCase):
     def test_seq(self):
         self.assertEqual(KnuthSequence(15), [13, 4, 1])
         self.assertEqual(KnuthSequence(14), [13, 4, 1])
-        self.assertEqual(KnuthSequence(13), [4, 1])
+        self.assertEqual(KnuthSequence(13), [13, 4, 1])
         self.assertEqual(KnuthSequence(12), [4, 1])
         self.assertEqual(KnuthSequence(11), [4, 1])
         self.assertEqual(KnuthSequence(5), [4, 1])
-        self.assertEqual(KnuthSequence(4), [1])
+        self.assertEqual(KnuthSequence(4), [4, 1])
         self.assertEqual(KnuthSequence(3), [1])
-        self.assertEqual(KnuthSequence(1), [])
+        self.assertEqual(KnuthSequence(1), [1])
         self.assertEqual(KnuthSequence(0), [])
         
     def test_sort(self):
@@ -39,3 +39,4 @@ class TestShell(unittest.TestCase):
 if __name__ == '__main__':
     print("BEFORE")
     unittest.main()
+
