@@ -1,7 +1,7 @@
 def KnuthSequence(array_size: int) -> 'list[int]':
     i = 1
     seq = []
-    while i < array_size:
+    while i <= array_size:
         seq.append(i)
         i = i*3 + 1
     seq.reverse()
@@ -25,4 +25,4 @@ def ShellSort(array: 'list[int]') -> None:
     for step in seq:
         for i in range(0, step):
             InsertionSortStep(array, step, i)
-
+ 
