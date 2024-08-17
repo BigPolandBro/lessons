@@ -31,5 +31,6 @@ def QuickSort(array, left, right):
     iN = ArrayChunk(array, left, right)
     QuickSort(array, left, iN-1)
     QuickSort(array, iN+1, right)
-    
+
+
 
