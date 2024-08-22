@@ -10,18 +10,18 @@ def ArrayChunk(M, left, right):
     M[i+1], M[right] = M[right], M[i+1]
     return i+1
 
-def QuickSortTailOptimization(M, left, right):
+def QuickSortTailOptimization(array, left, right):
     def start():
         nonlocal left, right
         if left >= right:
             return
         
-        iN = ArrayChunk(M, left, right)
+        iN = ArrayChunk(array, left, right)
         if iN - left < right - iN:
-            QuickSortTailOptimization(M, left, iN - 1)
+            QuickSortTailOptimization(array, left, iN - 1)
             left = iN + 1 
         else:
-            QuickSortTailOptimization(M, iN + 1, right)
+            QuickSortTailOptimization(array, iN + 1, right)
             right = iN - 1
             
         start()
