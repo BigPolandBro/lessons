@@ -1,4 +1,4 @@
-def ArrayChunk(array, left, right):
+def ArrayChunk(array: 'list[int]', left: int, right: int) -> int:
     if left > right:
         return -1
 
@@ -14,11 +14,11 @@ def ArrayChunk(array, left, right):
     return i + 1
 
 
-def KthOrderStatisticsStep(Array, L, R, k):
+def KthOrderStatisticsStep(Array: 'list[int]', L: int, R: int, k: int) -> 'list[int]':
     iN = ArrayChunk(Array, L, R)
     if iN == k:
         return [iN, iN]
     if iN < k:
-        return [iN+1, R]
-    return [L, iN-1]
+        return [iN + 1, R]
+    return [L, iN - 1]
 
