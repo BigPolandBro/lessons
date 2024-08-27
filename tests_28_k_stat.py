@@ -52,6 +52,14 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
                     self.assertEqual(pivot, M[iN])
                 self.assertEqual(pivot, perm[(left + right) // 2])
 
+    def test_custom(self):
+        a = [5,6,7,4,1,2,3]
+        newLR = KthOrderStatisticsStep(a, 0, 6, 0)
+        self.assertEqual(a, [3,1,2,4,6,7,5])
+        self.assertTrue(self.check_array_chunk(a, 3, 0, 6, 4))
+        self.assertEqual(newLR[0], 0)
+        self.assertEqual(newLR[1], 2)
+
     def test_k_order_stat(self):
         n = 8
         borders_list = self.generate_borders(n)
@@ -74,19 +82,21 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
                         iN = L
                         self.assertEqual(SM[k - left], M[iN])
                         self.assertEqual(L, R)
-                        self.check_array_chunk(M, iN, left, right, pivot)
+                        self.assertTrue(self.check_array_chunk(M, iN, left, right, pivot))
                     elif left == L:
                         iN = R + 1
                         self.assertTrue(SM[k - left] < M[iN])
                         self.assertEqual(pivot, M[iN])
-                        self.check_array_chunk(M, iN, left, right, pivot)
+                        self.assertTrue(self.check_array_chunk(M, iN, left, right, pivot))
                     else:
                         iN = L - 1
                         self.assertTrue(SM[k - left] > M[iN])
                         self.assertEqual(pivot, M[iN])
-                        self.check_array_chunk(M, iN, left, right, pivot)
+                        self.assertTrue(self.check_array_chunk(M, iN, left, right, pivot))
 
 
 if __name__ == '__main__':
     print("BEFORE")
     unittest.main()
+
+
