@@ -5,7 +5,7 @@ from main import ArrayChunk, KthOrderStatisticsStep
 
 class TestKthOrderStatisticsStep(unittest.TestCase):
     def generate_permutations(self, n):
-        a = [i for i in range(0, n)]
+        a = list(range(0, n))
         return [list(perm) for perm in itertools.permutations(a)]
 
     def generate_borders(self, n):
@@ -20,9 +20,7 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
             return True
         if len(M) == 0:
             return iN == 0
-        if pivot != M[iN]:
-            return False
-        if iN < left or iN > right:
+        if pivot != M[iN] or iN < left or iN > right:
             return False
         for i in range(left, right + 1):
             if i < iN and M[i] >= M[iN]:
@@ -71,7 +69,7 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
                     pivot = M[(left+right)//2]
                     newLR = KthOrderStatisticsStep(M, left, right, k)
                     L, R = newLR[0], newLR[1]
-                    self.assertTrue(L <= k and k <= R)
+                    self.assertTrue(L <= k <= R)
                     if pivot == M[L]:
                         iN = L
                         self.assertEqual(SM[k - left], M[iN])
