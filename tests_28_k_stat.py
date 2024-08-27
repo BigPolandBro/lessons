@@ -55,10 +55,23 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
     def test_custom(self):
         a = [5,6,7,4,1,2,3]
         newLR = KthOrderStatisticsStep(a, 0, 6, 0)
-        self.assertEqual(a, [3,1,2,4,6,7,5])
+        self.assertEqual(a, [3, 2, 1, 4, 7, 6, 5])
         self.assertTrue(self.check_array_chunk(a, 3, 0, 6, 4))
         self.assertEqual(newLR[0], 0)
         self.assertEqual(newLR[1], 2)
+
+        a = [5, 7, 6]
+        iN = ArrayChunk(a, 0, 2)
+        self.assertEqual(a, [5, 6, 7])
+        self.assertEqual(iN, 1)
+        self.assertEqual(a[iN], 6)
+
+        a = [5, 7, 6]
+        newLR = KthOrderStatisticsStep(a, 0, 2, 0)
+        self.assertEqual(a, [5, 6, 7])
+        self.assertTrue(self.check_array_chunk(a, 1, 0, 2, 6))
+        self.assertEqual(newLR[0], 0)
+        self.assertEqual(newLR[1], 0)
 
     def test_k_order_stat(self):
         n = 8
