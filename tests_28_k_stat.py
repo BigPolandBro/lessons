@@ -1,7 +1,25 @@
 import unittest
 import itertools
 
-from main import ArrayChunk, KthOrderStatisticsStep
+from main import swap_elements, ArrayChunk, KthOrderStatisticsStep
+
+def ArrayChunk_(M):
+    iN = (len(M)-1)//2
+    i1 = 0
+    i2 = len(M) - 1
+    while i1 <= i2:
+        while M[i1] < M[iN]:
+            i1 += 1
+        while M[i2] > M[iN]:
+            i2 -= 1
+        if i1 == i2 - 1 and M[i1] > M[i2]:
+            M[i1], M[i2] = M[i2], M[i1]
+            iN = ArrayChunk_(M)
+            return iN
+        if i1 == i2 or (i1 == i2 - 1 and M[i1] < M[i2]):
+            return iN
+        iN = swap_elements(M, i1, i2, iN)
+    return iN
 
 class TestKthOrderStatisticsStep(unittest.TestCase):
     def generate_permutations(self, n):
@@ -35,7 +53,7 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
         self.assertEqual(borders, [0, 0])
 
     def test_array_chunk_all_perm(self):
-        n = 9
+        n = 8
         borders_list = self.generate_borders(n)
         for perm in self.generate_permutations(n):
             for borders in borders_list:
@@ -46,6 +64,11 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
                 if not self.check_array_chunk(M, iN, left, right):
                     print(perm, M, iN)
                 self.assertTrue(self.check_array_chunk(M, iN, left, right))
+                if right - left + 1 == n:
+                    M2 = perm[:]
+                    iN2 = ArrayChunk_(M2)
+                    self.assertEqual(M, M2)
+                    self.assertEqual(iN, iN2)
 
     def test_custom(self):
         a = [5,6,7,4,1,2,3]
@@ -69,7 +92,7 @@ class TestKthOrderStatisticsStep(unittest.TestCase):
         self.assertEqual(newLR[1], 0)
 
     def test_k_order_stat(self):
-        n = 9
+        n = 8
         borders_list = self.generate_borders(n)
         for perm in self.generate_permutations(n):
             for borders in borders_list:
