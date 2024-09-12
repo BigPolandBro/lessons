@@ -166,12 +166,24 @@ class TestBinarySearch(unittest.TestCase):
             self.assertEqual(binary_search.GetResult(), 1)
             self.assertEqual((binary_search.Left + binary_search.Right) // 2, i)
 
-        for N in range(0, 15, 2):
+        for N in [0, 2, 4, 6, 8, 10, 12, 14]:
             binary_search = BinarySearch(sorted_array)
             while binary_search.GetResult() == 0:
                 binary_search.Step(N)
 
             self.assertEqual(binary_search.GetResult(), -1)
+
+    def test_left_and_right_boundaries(self):
+        array = [10, 20, 30, 40, 50]
+        bs = BinarySearch(array)
+        while bs.GetResult() == 0:
+            bs.Step(10)
+        self.assertEqual(bs.GetResult(), 1)
+
+        bs = BinarySearch(array)
+        while bs.GetResult() == 0:
+            bs.Step(50)
+        self.assertEqual(bs.GetResult(), 1)
 
 
 if __name__ == '__main__':
