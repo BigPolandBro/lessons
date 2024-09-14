@@ -34,11 +34,12 @@ class TestBinarySearch(unittest.TestCase):
         self.assertEqual(cnt, 1)
         self.assertEqual(bs.Left, 0)
         self.assertEqual(bs.Right, -1)
+        self.assertEqual(cnt, 1)
         self.assertEqual(bs.GetResult(), -1)
 
         a = [404]
 
-        for N in [404, 505]:
+        for N in [303, 404, 505]:
             bs = BinarySearch(a)
             cnt = 0
             while bs.GetResult() == 0:
@@ -46,8 +47,15 @@ class TestBinarySearch(unittest.TestCase):
                 bs.Step(N)
 
             self.assertEqual(cnt, 1)
-            self.assertEqual(bs.Left, 0)
-            self.assertEqual(bs.Right, 0)
+            if N == 404:
+                self.assertEqual(bs.Left, 0)
+                self.assertEqual(bs.Right, 0)
+            if N > 404:
+                self.assertEqual(bs.Left, 1)
+                self.assertEqual(bs.Right, 0)
+            if N < 404:
+                self.assertEqual(bs.Left, 0)
+                self.assertEqual(bs.Right, -1)
             self.assertEqual(bs.GetResult(), 1 if N in a else -1)
 
         a = [-404, 505]
@@ -60,8 +68,15 @@ class TestBinarySearch(unittest.TestCase):
                 bs.Step(N)
 
             self.assertEqual(cnt, 1)
-            self.assertEqual(bs.Left, 0)
-            self.assertEqual(bs.Right, 1)
+            if N == -404:
+                self.assertEqual(bs.Left, 0)
+                self.assertEqual(bs.Right, 1)
+            if N >= 505:
+                self.assertEqual(bs.Left, 1)
+                self.assertEqual(bs.Right, 1)
+            if N == -606:
+                self.assertEqual(bs.Left, 0)
+                self.assertEqual(bs.Right, -1)
             self.assertEqual(bs.GetResult(), 1 if N in a else -1)
 
         a = [-404, 505, 606]
@@ -85,7 +100,7 @@ class TestBinarySearch(unittest.TestCase):
             cnt += 1
             bs.Step(N)
 
-        self.assertEqual(cnt, 2)
+        self.assertEqual(cnt, 1)
         self.assertEqual(bs.Left, 0)
         self.assertEqual(bs.Right, 0)
         self.assertEqual(bs.GetResult(), 1)
@@ -97,7 +112,7 @@ class TestBinarySearch(unittest.TestCase):
             cnt += 1
             bs.Step(N)
 
-        self.assertEqual(cnt, 2)
+        self.assertEqual(cnt, 1)
         self.assertEqual(bs.Left, 2)
         self.assertEqual(bs.Right, 2)
         self.assertEqual(bs.GetResult(), 1)
@@ -109,10 +124,21 @@ class TestBinarySearch(unittest.TestCase):
             cnt += 1
             bs.Step(N)
 
-        self.assertEqual(cnt, 2)
+        self.assertEqual(cnt, 1)
         self.assertEqual(bs.Left, 2)
         self.assertEqual(bs.Right, 2)
         self.assertEqual(bs.GetResult(), -1)
+
+    def test_fast_find(self):
+        # Тестирование извлечения строки из массива найденного элемента
+        array = [10, 20, 30, 40, 50, 60]
+        bs = BinarySearch(array)
+        cnt = 0
+        while bs.GetResult() == 0:
+            cnt += 1
+            bs.Step(60)
+        self.assertEqual(cnt, 2)
+        self.assertEqual(bs.GetResult(), 1)
 
     def test_abundant(self):
         for n in range(0, 1000):
@@ -189,4 +215,3 @@ class TestBinarySearch(unittest.TestCase):
 if __name__ == '__main__':
     print("BEFORE")
     unittest.main()
-
